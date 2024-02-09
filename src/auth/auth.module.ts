@@ -13,7 +13,6 @@ export class AuthModule {
   static register(config: AuthConfig): DynamicModule {
     return {
       module: AuthModule,
-      imports: [ConfigModule.forRoot({envFilePath: ".env"})],
       providers: [
         {
           provide: AUTH_CONFIG,

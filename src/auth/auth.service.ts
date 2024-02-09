@@ -6,6 +6,7 @@ export class AuthService {
   private clientId: string;
 
   constructor(@Inject(AUTH_CONFIG) options: AuthConfig) {
+    console.log("Set up authService: ", options.clientId);
     this.clientId = options.clientId;
   }
 

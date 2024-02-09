@@ -20,7 +20,7 @@ export class AuthModule {
         AuthService,
         AuthUserService,
       ],
-      exports: [AuthUserService],
+      exports: [AuthService, AuthUserService],
     };
   }
 }

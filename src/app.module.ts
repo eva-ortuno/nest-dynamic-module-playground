@@ -5,8 +5,19 @@ import { AUTH_CONFIG, AuthModule } from './auth/auth.module';
 import { ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule.register({clientId: "My message"})],
+  imports: [AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      inject: [ConfigService],
+      provide: AUTH_CONFIG,
+      useFactory: (config: ConfigService) => {
+        return {
+          clientId: config.getOrThrow('MESSAGE'),
+        };
+      },
+    },
+  ],
 })
 export class AppModule {}

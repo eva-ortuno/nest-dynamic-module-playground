@@ -1,25 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AUTH_CONFIG, AuthModule } from './auth/auth.module';
-import { ConfigModule, ConfigService } from "@nestjs/config";
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [AuthModule, ConfigModule.forRoot({
-    envFilePath: '.env',
-  })],
+  imports: [AuthModule.register({clientId: "MESSAGE"})],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      inject: [ConfigService],
-      provide: AUTH_CONFIG,
-      useFactory: async  (config: ConfigService) => {
-        return {
-          clientId: config.getOrThrow('MESSAGE'),
-        };
-      },
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {}

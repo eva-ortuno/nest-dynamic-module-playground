@@ -4,7 +4,9 @@ import { AUTH_CONFIG } from "./auth/auth.module";
 
 @Injectable()
 export class AppService {
-  constructor(@Inject(AUTH_CONFIG) private authUserService: AuthUserService) {}
+  constructor(private authUserService: AuthUserService) {
+    console.log("<<<<<<<<<<<<< app service log : ", authUserService);
+  }
   getHello(): string {
     return this.authUserService.extendMessage('my extension message');
   }

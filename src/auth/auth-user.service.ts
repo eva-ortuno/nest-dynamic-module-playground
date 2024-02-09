@@ -4,7 +4,7 @@ import { AUTH_CONFIG } from "./auth.module";
 
 @Injectable()
 export class AuthUserService {
-  constructor(@Inject(AUTH_CONFIG) private authService: AuthService) {
+  constructor(private authService: AuthService) {
     console.log("Set up authUserService: ", authService.get());
   }
 

@@ -10,8 +10,9 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
   providers: [
     AppService,
     {
+      inject: [ConfigService],
       provide: AUTH_CONFIG,
-      useValue: (configService: ConfigService) => {
+      useFactory: (configService: ConfigService) => {
         return {
           clientId: configService.getOrThrow("MESSAGE"),
         }

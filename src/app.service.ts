@@ -11,7 +11,7 @@ export class AppService {
   }
 
   getHello2(): string {
-    // AUTH OTHER SERVICE instantiate the AuthService with configuration 2
+    // AUTH OTHER SERVICE instantiates the AuthService with configuration 2
     return this.authOtherService.extendMessage("extension OTHER");
   }
 }

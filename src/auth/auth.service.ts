@@ -1,5 +1,5 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { AUTH_CONFIG, AuthConfig } from "./auth.module";
+import { Injectable } from '@nestjs/common';
+import { AuthConfig } from './auth.module';
 
 @Injectable()
 export class AuthService {

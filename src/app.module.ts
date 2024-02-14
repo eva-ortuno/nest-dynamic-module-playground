@@ -1,23 +1,21 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AUTH_CONFIG, AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthService } from './auth/auth.service';
 
 @Module({
-  imports: [AuthModule, ConfigModule.forRoot({ envFilePath: '.env' })],
-  controllers: [AppController],
-  providers: [
-    AppService,
-    {
+  imports: [
+    ConfigModule.forRoot({ envFilePath: '.env' }),
+    AuthModule.register({
+      imports: [ConfigModule],
       inject: [ConfigService],
-      provide: AUTH_CONFIG,
-      useFactory: (configService: ConfigService) => {
-        return {
-          clientId: configService.getOrThrow('MESSAGE'),
-        };
-      },
-    },
+      useFactory: () => (configService: ConfigService) =>
+        new AuthService({ clientId: configService.getOrThrow('MESSAGE') }),
+    }),
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

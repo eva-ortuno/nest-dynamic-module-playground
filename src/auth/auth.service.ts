@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { AuthConfig } from './auth.module';
+
+export interface AuthConfig {
+  clientId: string;
+}
 
 @Injectable()
 export class AuthService {

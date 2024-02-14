@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AUTH_CONFIG, AuthConfig } from './auth.module';
+import { AuthService, AuthConfig } from './auth.service';
+import { AUTH_CONFIG } from './auth.module';
 
 @Injectable()
 export class AuthUserService {

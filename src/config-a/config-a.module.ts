@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from '../auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthService } from '../auth/auth.service';
-import { HealthModule } from '../health/health.module';
+import { ConfigAService } from './config-a.service';
+import { AuthUserService } from '../auth/auth-user.service';
 
 @Module({
   imports: [
@@ -13,11 +12,15 @@ import { HealthModule } from '../health/health.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: () => (configService: ConfigService) =>
-        new AuthService({ clientId: configService.getOrThrow('MESSAGE') }),
+        new AuthService({ clientId: configService.getOrThrow('MESSAGE_A') }),
     }),
-    HealthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: ConfigAService,
+      useExisting: AuthUserService,
+    },
+  ],
+  exports: [ConfigAService],
 })
-export class AppModule {}
+export class ConfigAModule {}

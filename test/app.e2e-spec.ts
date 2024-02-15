@@ -15,17 +15,24 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/healthA (GET)', () => {
+  it('/:id (GET)', () => {
     return request(app.getHttpServer())
       .get('/TestMessage')
       .expect(200)
       .expect('MY_MESSAGE - TestMessage');
   });
 
-  it('/configA (GET)', () => {
+  it('/healthA (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/healthA')
       .expect(200)
       .expect('MESSAGE_FOR_A - HEALTH A');
+  });
+
+  it('/healthB (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/healthB')
+      .expect(200)
+      .expect('MESSAGE_FOR_B - HEALTH B');
   });
 });

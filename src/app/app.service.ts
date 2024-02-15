@@ -8,11 +8,15 @@ export class AppService {
     private authUserService: AuthUserService,
     private healthService: HealthService,
   ) {}
-  getHello(message): string {
+  getHello(message: string): string {
     return this.authUserService.extendMessage(message);
   }
 
-  healthA(message: string) : string {
-    return this.healthService.getHello(message)
+  healthA(message: string): string {
+    return this.healthService.getHelloA(message);
+  }
+
+  healthB(message: string): string {
+    return this.healthService.getHelloB(message);
   }
 }

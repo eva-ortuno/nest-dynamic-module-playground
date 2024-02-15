@@ -7,11 +7,13 @@ export class AppController {
 
   @Get(':message')
   getMessage(@Param() params: any): string {
-    return this.appService.getHello(params.message);
-  }
-
-  @Get()
-  getHealthA(): string {
-    return this.appService.healthA('HEALTH A');
+    switch (params.message) {
+      case 'healthA':
+        return this.appService.healthA('HEALTH A');
+      case 'healthB':
+        return this.appService.healthB('HEALTH B');
+      default:
+        return this.appService.getHello(params.message);
+    }
   }
 }
